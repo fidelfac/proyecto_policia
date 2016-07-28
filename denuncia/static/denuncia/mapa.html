@@ -1,0 +1,84 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'denuncia/style.css' %}" />
+
+<script type ="text/javascript" src ="{% static 'denuncia/jquery.min.js' %}"></script>
+<script type ="text/javascript" src ="{% static 'denuncia/maps.js' %}"></script>
+<script type ="text/javascript" src ="{% static 'denuncia/gmaps.js' %}"></script>
+    
+<script type="text/javascript" src="{% static 'denuncia/func.js' %}"></script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+<script type="text/javascript">
+
+           var map;
+
+            $(document).ready(function () {
+
+alert('func');
+
+                map = new GMaps({
+                    div: '#mapa',
+
+                    lat: -17.8053589,
+                    lng: -63.15815877
+                });
+                //map.addMarker({
+                //    name: 'marker',
+                //    lat: -17.8053589,
+                //    lng: -63.15815877,
+                //    //title: 'hola que tal'
+
+                //});
+
+                map.setContextMenu({
+                    control: 'map',
+                    options: [{
+                        title: 'Marcar',
+                        name: 'add_marker',
+                        action: function (e) {
+                            this.addMarker({
+                                //draggable: true,
+                                lat: e.latLng.lat(),
+                                lng: e.latLng.lng(),
+                                title: 'Nuevo marcador'
+
+                            });
+
+
+                            
+                            $(document).ready(function ObtenerValor() {
+                                var text1 = document.getElementById(TextBox1);
+                                var text2 = document.getElementById(TextBox2);
+                                text1.value = e.latLng.lat();
+                                text2.value = e.latLng.lng();
+                                //alert(text1.value);
+                            });
+
+                        }
+                    }, {
+                        title: 'Centrar',
+                        name: 'center_here',
+                        action: function (e) {
+                            this.setCenter(e.latLng.lat(), e.latLng.lng());
+                        }
+                    }]
+                });
+            });
+
+    </script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<input type="button" onclick="retornarFecha()" value="Ver" id="bu">
+<div  class="float-right" 
+        id="mapa" style="width: 502px; height: 372px"/>
+</body>
+</html>

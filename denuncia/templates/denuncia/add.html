@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="es-us" >
+<head>
+{% load staticfiles %}
+<title>Añadir denuncia | Pagina Principal</title>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'denuncia/style.css' %}" />
+
+<script type ="text/javascript" src ="{% static 'denuncia/jquery.min.js' %}"></script>
+<script type ="text/javascript" src ="{% static 'denuncia/maps.js' %}"></script>
+<script type ="text/javascript" src ="{% static 'denuncia/gmaps.js' %}"></script>
+    
+<script type="text/javascript" src="{% static 'denuncia/func.js' %}"></script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+
+
+
+<script type="text/javascript">
+
+        
+
+           var map;
+
+            $(document).ready(function () {
+
+alert('func');
+
+                map = new GMaps({
+                    div: '#mapa',
+
+                    lat: -17.8053589,
+                    lng: -63.15815877
+                });
+                //map.addMarker({
+                //    name: 'marker',
+                //    lat: -17.8053589,
+                //    lng: -63.15815877,
+                //    //title: 'hola que tal'
+
+                //});
+
+                map.setContextMenu({
+                    control: 'map',
+                    options: [{
+                        title: 'Marcar',
+                        name: 'add_marker',
+                        action: function (e) {
+                            this.addMarker({
+                                //draggable: true,
+                                lat: e.latLng.lat(),
+                                lng: e.latLng.lng(),
+                                title: 'Nuevo marcador'
+
+                            });
+
+
+                            
+                            $(document).ready(function ObtenerValor() {
+                                var text1 = document.getElementById(TextBox1);
+                                var text2 = document.getElementById(TextBox2);
+                                text1.value = e.latLng.lat();
+                                text2.value = e.latLng.lng();
+                                //alert(text1.value);
+                            });
+
+                        }
+                    }, {
+                        title: 'Centrar',
+                        name: 'center_here',
+                        action: function (e) {
+                            this.setCenter(e.latLng.lat(), e.latLng.lng());
+                        }
+                    }]
+                });
+            });
+
+    </script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<body class=" app-denuncia model-denuncia change-form"
+  data-admin-utc-offset="-14400">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">F.E.L.C.C</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Bienvenido/a,
+                <strong>root</strong>.
+            
+            
+                
+                    <a href="/">Ver el sitio</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Cambiar contraseña</a> /
+                
+                <a href="/admin/logout/">Terminar sesión</a>
+            
+        </div>
+        
+        
+        
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="/admin/">Inicio</a>
+&rsaquo; <a href="/admin/denuncia/">Denuncia</a>
+&rsaquo; <a href="/admin/denuncia/denuncia/">Denuncias</a>
+&rsaquo; Añadir denuncia
+</div>
+
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Añadir denuncia</h1>
+        <div id="content-main">
+
+
+
+<form enctype="multipart/form-data" action="" method="post" id="denuncia_form" novalidate><input type='hidden' name='csrfmiddlewaretoken' value='ObtaS3oHYNVGGjyzUnvZ0xAdSnCo7oqT' />
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    <div class="form-row field-mapa">
+        <div  class="float-right" 
+        id="mapa" style="width: 502px; height: 372px"/>
+
+</div>
+    
+    
+        <div class="form-row field-motivo">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_motivo">Motivo:</label>
+                        
+                            <input class="vTextField" id="id_motivo" maxlength="30" name="motivo" type="text" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-descripcion">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_descripcion">Descripcion:</label>
+                        
+                            <input class="vTextField" id="id_descripcion" maxlength="200" name="descripcion" type="text" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-lugardelhecho">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_lugardelhecho">Lugardelhecho:</label>
+                        
+                            <input class="vTextField" id="id_lugardelhecho" maxlength="50" name="lugardelhecho" type="text" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-fecha">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_fecha">Fecha:</label>
+                        
+                            <input class="vDateField" id="id_fecha" name="fecha" size="10" type="text" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-hora">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_hora">Hora:</label>
+                        
+                            <input class="vTimeField" id="id_hora" name="hora" size="8" type="text" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+
+
+        <div class="form-row field-latitud">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_latitud">Latitud:</label>
+                        
+                            <input id="id_latitud" name="latitud" step="any" type="number" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-longitud">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_longitud">Longitud:</label>
+                        
+                            <input id="id_longitud" name="longitud" step="any" type="number" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-personalid">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_personalid">Personalid:</label>
+                        
+                            <input class="vIntegerField" id="id_personalid" name="personalid" type="text" value="2" required />
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+<input type="submit" value="Grabar" class="default" name="_save" />
+
+
+<input type="submit" value="Grabar y añadir otro" name="_addanother" />
+<input type="submit" value="Grabar y continuar editando" name="_continue" />
+</div>
+
+
+
+    <script type="text/javascript"
+            id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            
+                data-model-name="denuncia"
+            >
+    </script>
+
+
+
+
+<script type="text/javascript"
+        id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+        
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
